@@ -14,7 +14,8 @@ npm install && npm start
 #### Routers
 
 - auth.js
-- jobs.js
+- words.js
+- generalWord.js
 
 #### User Model
 
@@ -55,15 +56,3 @@ Email Validation Regex
 - xss-clean
 - express-rate-limit
 
-Swagger UI
-
-```yaml
-/jobs/{id}:
-  parameters:
-    - in: path
-      name: id
-      schema:
-        type: string
-      required: true
-      description: the job id
-```
