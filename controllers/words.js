@@ -27,21 +27,25 @@ const getWord = async (req, res) => {
 
 const updateWord = async (req, res) => {
   const {
-    body: { company, position },
+    body: { word, level },
     user: { userId },
     params: { id: wordID },
   } = req;
-  if (company === "" || position === "") {
-    throw new BadRequestError(`company or position fields cannot be empty`);
+  if (word === "" || level === "") {
+    throw new BadRequestError(`word or level fields cannot be empty`);
   }
-  const word = await Word.findOneAndUpdate({ createdBy: userId, _id: wordID }, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  if (!word) {
+  const localWord = await Word.findOneAndUpdate(
+    { createdBy: userId, _id: wordID },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  if (!localWord) {
     throw new NotFoundError(`there is no word with id: ${wordID}`);
   }
-  res.status(StatusCodes.OK).json({ success: true, data: word });
+  res.status(StatusCodes.OK).json({ success: true, data: { word: localWord } });
 };
 
 const deleteWord = async (req, res) => {
