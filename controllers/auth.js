@@ -6,6 +6,7 @@ const register = async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password)
     throw new BadRequestError("please fill all fileds name and email and password");
+  if (req.body.isAdmin) req.body.isAdmin = false;
 
   const user = await User.create({ ...req.body });
   const token = user.genToken();
