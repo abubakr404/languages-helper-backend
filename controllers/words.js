@@ -9,6 +9,15 @@ const getAllWords = async (req, res) => {
 
 const createWord = async (req, res) => {
   req.body.createdBy = req.user.userId;
+  const isWordExist = await Word.findOne({
+    createdBy: req.body.createdBy,
+    word: req.body.word,
+  });
+  if (isWordExist) {
+    throw new BadRequestError(
+      `Duplicated value !! The word "${req.body.word}" is already exist`
+    );
+  }
   const word = await Word.create(req.body);
   res.status(StatusCodes.CREATED).json(word);
 };

@@ -1,0 +1,520 @@
+openapi: 3.0.0
+info:
+  title: languages helper api
+  contact:
+    name: Abubakar Hisham
+    url: https://abubakr404.github.io/
+    email: abubakr404@outlook.com
+  version: "1.0"
+servers:
+  - url: https://languges-helper.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: user login
+      operationId: userlogin
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/userloginrequest"
+                - example:
+                    email: test@mail.com
+                    password: "123456789"
+            example:
+              email: test@mail.com
+              password: "123456789"
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: user register
+      operationId: userregister
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/userregisterrequest"
+                - example:
+                    name: test user
+                    email: test@mail.com
+                    password: "123456789"
+            example:
+              name: test user
+              email: test@mail.com
+              password: "123456789"
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users:
+    get:
+      tags:
+        - Users
+      summary: get all users
+      operationId: getallusers
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Users
+      summary: create user
+      operationId: createuser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createuserrequest"
+                - example:
+                    name: test user
+                    email: test@mail.com
+                    password: "123456789"
+            example:
+              name: test user
+              email: test@mail.com
+              password: "123456789"
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - Users
+      summary: get user
+      operationId: getuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Users
+      summary: update user
+      operationId: updateuser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updateuserrequest"
+                - example:
+                    name: test user
+                    email: test@mail.com
+            example:
+              name: test user
+              email: test@mail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Users
+      summary: delete user
+      operationId: deleteuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /words:
+    get:
+      tags:
+        - Words
+      summary: get all words
+      operationId: getallwords
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Words
+      summary: create word
+      operationId: createword
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createwordrequest"
+                - example:
+                    word: test
+                    sentence: test example
+                    level: easy
+            example:
+              word: test
+              sentence: test example
+              level: easy
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /words/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The word ID
+    get:
+      tags:
+        - Words
+      summary: get word
+      operationId: getword
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Words
+      summary: update word
+      operationId: updateword
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updatewordrequest"
+                - example:
+                    word: update
+                    sentence: update example
+                    level: easy
+            example:
+              word: update
+              sentence: update example
+              level: easy
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Words
+      summary: delete word
+      operationId: deleteword
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /general-words:
+    get:
+      tags:
+        - General Words
+      summary: get all general words
+      operationId: getallgeneralwords
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - General Words
+      summary: create general word
+      operationId: creategeneralword
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/creategeneralwordrequest"
+                - example:
+                    word: general
+                    sentence: general example
+            example:
+              word: general
+              sentence: general example
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /general-words/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The general word ID
+    get:
+      tags:
+        - General Words
+      summary: get general word
+      operationId: getgeneralword
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - General Words
+      summary: update general word
+      operationId: updategeneralword
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updategeneralwordrequest"
+                - example:
+                    word: update
+                    sentence: update example
+            example:
+              word: update
+              sentence: update example
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - General Words
+      summary: delete general word
+      operationId: deletegeneralword
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    userloginrequest:
+      title: userloginrequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: test@mail.com
+        password: "123456789"
+    userregisterrequest:
+      title: userregisterrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: test user
+        email: test@mail.com
+        password: "123456789"
+    createuserrequest:
+      title: createuserrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: test user
+        email: test@mail.com
+        password: "123456789"
+    updateuserrequest:
+      title: updateuserrequest
+      required:
+        - name
+        - email
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        name: test user
+        email: test@mail.com
+    createwordrequest:
+      title: createwordrequest
+      required:
+        - word
+        - sentence
+        - level
+      type: object
+      properties:
+        word:
+          type: string
+        sentence:
+          type: string
+        level:
+          type: string
+      example:
+        word: test
+        sentence: test example
+        level: easy
+    updatewordrequest:
+      title: updatewordrequest
+      required:
+        - word
+        - sentence
+        - level
+      type: object
+      properties:
+        word:
+          type: string
+        sentence:
+          type: string
+        level:
+          type: string
+      example:
+        word: update
+        sentence: update example
+        level: easy
+    creategeneralwordrequest:
+      title: creategeneralwordrequest
+      required:
+        - word
+        - sentence
+      type: object
+      properties:
+        word:
+          type: string
+        sentence:
+          type: string
+      example:
+        word: general
+        sentence: general example
+    updategeneralwordrequest:
+      title: updategeneralwordrequest
+      required:
+        - word
+        - sentence
+      type: object
+      properties:
+        word:
+          type: string
+        sentence:
+          type: string
+      example:
+        word: update
+        sentence: update example
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+  - name: Users
+  - name: Words
+  - name: General Words

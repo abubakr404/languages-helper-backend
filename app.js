@@ -7,6 +7,11 @@ const cros = require("cors");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
 
+// swagger
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
+
 const express = require("express");
 const app = express();
 
@@ -15,6 +20,7 @@ const connectDB = require("./db/connect");
 
 // Routers
 const authRouter = require("./routes/auth");
+const usersRouter = require("./routes/users");
 const wordsRouter = require("./routes/words");
 const generalWordsRouter = require("./routes/generalWord");
 
@@ -33,8 +39,14 @@ app.use(cros());
 app.use(xss());
 // extra packages
 
+app.get("/", (req, res) => {
+  res.send("<h1>Languages Helper API</h1><a href='/api-docs'>Documetation</a>");
+});
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
 // routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", authUser, usersRouter);
 app.use("/api/v1/words", authUser, wordsRouter);
 app.use("/api/v1/general-words", authUser, generalWordsRouter);
 

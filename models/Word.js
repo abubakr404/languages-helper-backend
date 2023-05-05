@@ -5,7 +5,6 @@ const WordSchema = new mongoose.Schema(
     word: {
       type: String,
       required: [true, "word is required"],
-      unique: true,
       maxlength: 60,
     },
     sentence: {

@@ -15,10 +15,9 @@ const createGeneralWord = async (req, res) => {
 
 const getGeneralWord = async (req, res) => {
   const {
-    user: { userId },
     params: { id: wordID },
   } = req;
-  const word = await Word.findOne({ createdBy: userId, _id: wordID });
+  const word = await GeneralWord.findOne({ _id: wordID });
   if (!word) {
     throw new NotFoundError(`there is no word with id: ${wordID}`);
   }
@@ -27,31 +26,29 @@ const getGeneralWord = async (req, res) => {
 
 const updateGeneralWord = async (req, res) => {
   const {
-    body: { company, position },
-    user: { userId },
+    body: { word, level },
     params: { id: wordID },
   } = req;
-  if (company === "" || position === "") {
-    throw new BadRequestError(`company or position fields cannot be empty`);
+  if (word === "" || level === "") {
+    throw new BadRequestError(`word or level fields cannot be empty`);
   }
-  const word = await Word.findOneAndUpdate({ createdBy: userId, _id: wordID }, req.body, {
+  const localWord = await GeneralWord.findOneAndUpdate({ _id: wordID }, req.body, {
     new: true,
     runValidators: true,
   });
-  if (!word) {
+  if (!localWord) {
     throw new NotFoundError(`there is no word with id: ${wordID}`);
   }
-  res.status(StatusCodes.OK).json({ success: true, data: word });
+  res.status(StatusCodes.OK).json({ success: true, data: { word: localWord } });
 };
 
 const deleteGeneralWord = async (req, res) => {
   const {
-    user: { userId },
     params: { id: wordID },
   } = req;
-  const word = await Word.findOneAndDelete({ createdBy: userId, _id: wordID });
+  const word = await GeneralWord.findOneAndDelete({ _id: wordID });
   if (!word) {
-    throw new NotFoundError(`there is no word with id: ${wordID}`);
+    throw new NotFoundError(`there is no general word with id: ${wordID}`);
   }
   res.status(StatusCodes.OK).send();
 };
