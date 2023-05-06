@@ -47,7 +47,7 @@ const updateUser = async (req, res) => {
   if (!user) {
     throw new NotFoundError(`there is no user with id: ${userID}`);
   }
-  res.status(StatusCodes.OK).json({ success: true, data: { user } });
+  res.status(StatusCodes.OK).json(user);
 };
 
 const deleteUser = async (req, res) => {
