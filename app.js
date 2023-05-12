@@ -32,7 +32,7 @@ const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
 app.set("trust porxy", 1);
-app.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 500 }));
+app.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 1000 }));
 app.use(express.json());
 app.use(helmet());
 app.use(cros());
